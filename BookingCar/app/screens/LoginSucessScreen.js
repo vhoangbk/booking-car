@@ -3,33 +3,50 @@ import {
   Text,
   View,
   TouchableHighlight,
-  StyleSheet,
   Dimensions,
+  StyleSheet,
+  TextInput,
+  Alert,
 } from 'react-native';
 
 var Const = require('../utils/Const')
+var Utils = require('../utils/Utils')
 
-export default class LoginScreen extends Component {
+export default class LoginSucessScreen extends Component {
+  
+  constructor(props){
+    super(props);
+    
+  }
   
   render(){
     return(
       <View style={styles.container}>
-        {/* button login */} 
-        <TouchableHighlight style={styles.button_login} onPress={this.pressLogin.bind(this)} underlayColor={Const.COLOR.COLOR_0277BD_PRESS}>
-          <Text style={styles.button_title}>Đăng nhập</Text>
+        {/* button back */} 
+        <TouchableHighlight style={styles.button_logout} onPress={this.pressLogout.bind(this)} underlayColor={Const.COLOR.COLOR_607D8B_PRESS}>
+          <Text style={styles.button_logout_title}>Đăng xuất</Text>
+        </TouchableHighlight>
+        
+        {/* button booking ticket */} 
+        <TouchableHighlight style={styles.button_login} onPress={this.pressBooking.bind(this)} underlayColor={Const.COLOR.COLOR_0277BD_PRESS}>
+          <Text style={styles.button_title}>Đặt vé</Text>
         </TouchableHighlight>
   
         {/* button list car */}
         <TouchableHighlight style={styles.button_list_car} onPress={this.pressListCar.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
           <Text style={styles.button_title}>Danh sách xe</Text>
         </TouchableHighlight>
-    
+
       </View>
     )
   }
   
-  pressLogin(){
-    this.props.navigator.push({ title: 'login', index: Const.SCREEN.LOGIN_SCREEN });
+  pressLogout(){
+    this.props.navigator.pop();
+  }
+
+  pressBooking(){
+    console.log('pressBooking')
   }
   
   pressListCar(){
@@ -44,6 +61,22 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     justifyContent:'center',
     alignItems:'center',
+  },
+  button_logout:{
+    backgroundColor:'#FF5722',
+    paddingLeft:10,
+    paddingRight:10,
+    paddingTop:5,
+    paddingBottom:5,
+    borderRadius:5,
+    right:20,
+    top:40,
+    position:'absolute',
+  },
+  button_logout_title:{
+    fontSize:17,
+    fontWeight: 'bold',
+    color:'white',
   },
   button_login:{
     backgroundColor:Const.COLOR.COLOR_0277BD,

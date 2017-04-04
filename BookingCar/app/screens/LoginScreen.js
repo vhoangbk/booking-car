@@ -26,8 +26,8 @@ export default class LoginScreen extends Component {
     return(
       <View style={styles.container}>
         {/* button back */} 
-        <TouchableHighlight style={styles.button_back} onPress={this.props.pressBack} underlayColor={Const.COLOR.COLOR_607D8B_PRESS}>
-          <Text style={styles.button_title}>Trở lại</Text>
+        <TouchableHighlight style={styles.button_back} onPress={this.pressBack.bind(this)} underlayColor={Const.COLOR.COLOR_607D8B_PRESS}>
+          <Text style={styles.button_back_title}>Trở lại</Text>
         </TouchableHighlight>
         
         <TextInput style={styles.input_username} placeholder='Tên đăng nhập'
@@ -52,6 +52,10 @@ export default class LoginScreen extends Component {
       </View>
     )
   }
+  
+  pressBack(){
+    this.props.navigator.pop();
+  }
 
   pressLogin(){
     if('' == this.state.username){
@@ -62,6 +66,7 @@ export default class LoginScreen extends Component {
       Utils.showInfoMessage(Const.MESSAGE.PASSWORD_EMPTY);
       return;
     }
+    this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
   }
 }
 
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
     top:40,
     position:'absolute',
   },
-  button_title:{
+  button_back_title:{
     fontSize:17,
     fontWeight: 'bold',
     color:'white',

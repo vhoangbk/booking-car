@@ -11,5 +11,12 @@ module.exports = {
   MESSAGE:{
     USERNAME_EMPTY:'Hãy nhập tên đăng nhập',
     PASSWORD_EMPTY:'Hãy nhập tên mật khẩu',
-  }
+  },
+  SCREEN:{
+    MAIN_SCREEN:1,
+    LOGIN_SCREEN:2,
+    LOGIN_SUCESS_SCREEN:3,
+    LIST_CAR_SCREEN:4,
+  },
+
 };

@@ -15,24 +15,35 @@ import {
 
 import MainScreen from './app/screens/MainScreen'
 import LoginScreen from './app/screens/LoginScreen'
+import LoginSucessScreen from './app/screens/LoginSucessScreen'
+import ListCarScreen from './app/screens/ListCarScreen'
 
-const MAIN_SCREEN = 1;
-const LOGIN_SCREEN = 2;
+var Const = require('./app/utils/Const')
 
 export default class BookingCar extends Component {
   
   renderScene(route, navigator){
     var view : View;
     switch (route.index) {
-      case MAIN_SCREEN:
+      case Const.SCREEN.MAIN_SCREEN:
         view = <MainScreen 
-                pressLogin={()=>{navigator.push({ title: 'login', index: LOGIN_SCREEN });}}>
+                navigator={navigator}>
               </MainScreen>
         break;
-      case LOGIN_SCREEN:
+      case Const.SCREEN.LOGIN_SCREEN:
         view = <LoginScreen
-                 pressBack={()=>{navigator.pop()}}>
+                 navigator={navigator}>
               </LoginScreen>
+        break;
+      case Const.SCREEN.LOGIN_SUCESS_SCREEN:
+        view = <LoginSucessScreen
+                 navigator={navigator}>
+              </LoginSucessScreen>
+        break;
+      case Const.SCREEN.LIST_CAR_SCREEN:
+        view = <ListCarScreen
+                 navigator={navigator}>
+              </ListCarScreen>
         break;
     }
     return view;
@@ -41,7 +52,7 @@ export default class BookingCar extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{ title: 'main', index: MAIN_SCREEN }}
+        initialRoute={{ title: 'main', index: Const.SCREEN.MAIN_SCREEN }}
         renderScene={this.renderScene}
       />
     );
