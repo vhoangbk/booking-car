@@ -1,5 +1,4 @@
 module.exports = {
-  BASE_URL: '',
   COLOR: {
     COLOR_0277BD: '#0277BD',
     COLOR_0277BD_PRESS: '#0277BD70',
@@ -18,5 +17,7 @@ module.exports = {
     LOGIN_SUCESS_SCREEN:3,
     LIST_CAR_SCREEN:4,
   },
-
+  API:{
+    LOGIN_URL:'http://uema.archi-edge.com/api/v1/category2.json'
+  }
 };

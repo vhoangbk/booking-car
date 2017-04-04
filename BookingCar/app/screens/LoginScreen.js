@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {
   Text,
@@ -6,11 +7,13 @@ import {
   Dimensions,
   StyleSheet,
   TextInput,
-  Alert,
-} from 'react-native';
+} from 'react-native'
 
 var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
+var ApiClient = require('../network/APIClient')
+
+import * as Progress from 'react-native-progress';
 
 export default class LoginScreen extends Component {
   
@@ -19,6 +22,7 @@ export default class LoginScreen extends Component {
     this.state = {
       username : '',
       password : '',
+      isShowProgress:false,
     }
   }
   
@@ -30,6 +34,7 @@ export default class LoginScreen extends Component {
           <Text style={styles.button_back_title}>Trở lại</Text>
         </TouchableHighlight>
         
+        {/*username input*/}
         <TextInput style={styles.input_username} placeholder='Tên đăng nhập'
             returnKeyType='next'
             autoCapitalize='none'
@@ -37,6 +42,8 @@ export default class LoginScreen extends Component {
             onChangeText={(user)=>{this.setState({username : user.trim()})}}
             autoCorrect={false}>
         </TextInput>
+        
+        {/*password input*/}
         <TextInput style={styles.input_password} placeholder='Mật khẩu' secureTextEntry
           returnKeyType='done'
           autoCorrect={false}
@@ -45,11 +52,21 @@ export default class LoginScreen extends Component {
           value={this.state.password}
           onChangeText={(pass)=>{this.setState({password : pass.trim()})}}>
         </TextInput>
+        
+        {/*button login*/}
         <TouchableHighlight style={styles.button_login} onPress={this.pressLogin.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
           <Text style={styles.button_title}>Đăng nhập</Text>
         </TouchableHighlight>
+        
+        {/*progress*/}
+        { this.state.isShowProgress &&
+          <View style={{backgroundColor : '#88888850', alignItems:'center', justifyContent:'center', width:Dimensions.get('window').width, height:Dimensions.get('window').height, position:'absolute', top:0, left:0}}>
+            <Progress.CircleSnail color={['blue']} />
+          </View>
+        }
 
       </View>
+      
     )
   }
   
@@ -66,8 +83,39 @@ export default class LoginScreen extends Component {
       Utils.showInfoMessage(Const.MESSAGE.PASSWORD_EMPTY);
       return;
     }
-    this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
+
+    this.callApiLogin();
   }
+  /*
+   * call api login
+   */
+  callApiLogin(){
+    this.setState({ 
+        isShowProgress : true, 
+    });
+    var params = {category1_id: 1,};
+    ApiClient.postRequest(
+      Const.API.LOGIN_URL,
+      params,
+      (sucess)=>{
+        this.setState({ 
+          isShowProgress : false, 
+        });
+        for (i=0; i<sucess.response.category2_list.length; i++){
+            console.log(i+' --- '+sucess.response.category2_list[i].id + '---' + sucess.response.category2_list[i].name)
+        }
+        this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
+      },
+      (error)=>{
+        this.setState({ 
+          isShowProgress : false, 
+        });
+      }
+    )
+  }
+  
+  
+  
 }
 
 const styles = StyleSheet.create({
