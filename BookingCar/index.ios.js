@@ -8,25 +8,42 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  Navigator,
   Text,
   View
 } from 'react-native';
 
+import MainScreen from './app/screens/MainScreen'
+import LoginScreen from './app/screens/LoginScreen'
+
+const MAIN_SCREEN = 1;
+const LOGIN_SCREEN = 2;
+
 export default class BookingCar extends Component {
+  
+  renderScene(route, navigator){
+    var view : View;
+    switch (route.index) {
+      case MAIN_SCREEN:
+        view = <MainScreen 
+                pressLogin={()=>{navigator.push({ title: 'login', index: LOGIN_SCREEN });}}>
+              </MainScreen>
+        break;
+      case LOGIN_SCREEN:
+        view = <LoginScreen
+                 pressBack={()=>{navigator.pop()}}>
+              </LoginScreen>
+        break;
+    }
+    return view;
+  }
+  
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator
+        initialRoute={{ title: 'main', index: MAIN_SCREEN }}
+        renderScene={this.renderScene}
+      />
     );
   }
 }
@@ -38,16 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  
 });
 
 AppRegistry.registerComponent('BookingCar', () => BookingCar);
