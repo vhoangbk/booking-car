@@ -17,6 +17,8 @@ import MainScreen from './app/screens/MainScreen'
 import LoginScreen from './app/screens/LoginScreen'
 import LoginSucessScreen from './app/screens/LoginSucessScreen'
 import ListCarScreen from './app/screens/ListCarScreen'
+import BookingSelectCarScreen from './app/screens/BookingSelectCarScreen'
+import ListCustomerScreen from './app/screens/ListCustomerScreen'
 
 var Const = require('./app/utils/Const')
 
@@ -44,6 +46,16 @@ export default class BookingCar extends Component {
         view = <ListCarScreen
                  navigator={navigator}>
               </ListCarScreen>
+        break;
+      case Const.SCREEN.BOOKING_SELECT_CAR_SCREEN:
+        view = <BookingSelectCarScreen
+                 navigator={navigator}>
+              </BookingSelectCarScreen>
+        break;
+      case Const.SCREEN.LIST_CUSTOMER_SCREEN:
+        view = <ListCustomerScreen
+                 navigator={navigator}>
+              </ListCustomerScreen>
         break;
     }
     return view;

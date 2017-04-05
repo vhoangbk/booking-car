@@ -13,8 +13,8 @@ var Utils = require('../utils/Utils')
 import DatePicker from 'react-native-datepicker'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-export default class ListCarScreen extends Component {
-  
+export default class BookingSelectCarScreen extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -43,15 +43,8 @@ export default class ListCarScreen extends Component {
           <Text style={styles.button_back_title}>Trở lại</Text>
         </TouchableHighlight>
         
-        {/* date */}
-        {/*<TouchableHighlight style={styles.chose_date} onPress={this.pressChoseDate} underlayColor='#808080AA'>
-          <View style={styles.chose_date_view}>
-            <Text style={styles.chose_title}>Chọn ngày</Text>
-            <Image source={require('../images/drop_down.png')} style={styles.image_drop_down}></Image>
-          </View>  
-        </TouchableHighlight>*/}
-        
-        {<DatePicker
+        {/* date picker */}
+        <DatePicker
           style={styles.picker_date}
           date={this.state.date}
           mode="date"
@@ -80,8 +73,9 @@ export default class ListCarScreen extends Component {
             }
           }}
           onDateChange={(date) => {this.setState({date: date})}}
-          />}
+          />
      
+        {/* chose road */}
         <View style={{height:70, marginTop:20}}>
           <RadioForm
             radio_props={optionsRoad}
@@ -92,6 +86,7 @@ export default class ListCarScreen extends Component {
             />
         </View>
         
+        {/* chose time */}
         <View style={{height:35, marginTop:20, justifyContent:'space-between'} }>
           <RadioForm
             radio_props={optionsTime}
@@ -103,17 +98,17 @@ export default class ListCarScreen extends Component {
         </View>
         
         {/*button search*/}
-        <TouchableHighlight style={styles.button_search} onPress={this.pressSearch.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
-          <Text style={styles.button_title}>Tìm kiếm</Text>
+        <TouchableHighlight style={styles.button_continue} onPress={this.pressContinue.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
+          <Text style={styles.button_title}>Tiếp tục</Text>
         </TouchableHighlight>
 
       </View>
     )
   }
   
-  pressSearch(){
-    //console.log('date:'+this.state.date +' road:'+this.state.indexRoad+' time:'+this.state.indexTime)
-    this.props.navigator.push({ title: 'list_customer', index: Const.SCREEN.LIST_CUSTOMER_SCREEN });
+  pressContinue(){
+//     console.log('date:'+this.state.date +' road:'+this.state.indexRoad+' time:'+this.state.indexTime)
+//    this.props.navigator.push({ title: 'list_customer', index: Const.SCREEN.LIST_CAR_SCREEN });
   }
   
   onSelectedRoad(selected, index){
@@ -188,7 +183,7 @@ const styles = StyleSheet.create({
   picker_date:{
     width:Dimensions.get('window').width-100,
   },
-  button_search:{
+  button_continue:{
     backgroundColor:Const.COLOR.COLOR_0277BD,
     paddingLeft:20,
     paddingRight:20,

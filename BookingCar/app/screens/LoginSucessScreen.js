@@ -11,6 +11,7 @@ import {
 
 var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
+import BookingSelectCarScreen from './BookingSelectCarScreen'
 
 export default class LoginSucessScreen extends Component {
   
@@ -46,7 +47,7 @@ export default class LoginSucessScreen extends Component {
   }
 
   pressBooking(){
-    console.log('pressBooking')
+    this.props.navigator.push({ title: 'booking_select_car', index: Const.SCREEN.BOOKING_SELECT_CAR_SCREEN });
   }
   
   pressListCar(){

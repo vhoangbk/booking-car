@@ -16,6 +16,8 @@ module.exports = {
     LOGIN_SCREEN:2,
     LOGIN_SUCESS_SCREEN:3,
     LIST_CAR_SCREEN:4,
+    BOOKING_SELECT_CAR_SCREEN:5,
+    LIST_CUSTOMER_SCREEN:6,
   },
   API:{
     LOGIN_URL:'http://uema.archi-edge.com/api/v1/category2.json'

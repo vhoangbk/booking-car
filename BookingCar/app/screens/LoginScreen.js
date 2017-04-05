@@ -41,6 +41,7 @@ export default class LoginScreen extends Component {
         <TextInput style={styles.input_username} placeholder='Tên đăng nhập'
             returnKeyType='next'
             autoCapitalize='none'
+            value={this.state.username}
             onSubmitEditing={()=>{this.passwordInput.focus()}}
             onChangeText={(user)=>{this.setState({username : user.trim()})}}
             autoCorrect={false}>
@@ -117,6 +118,10 @@ export default class LoginScreen extends Component {
             console.log(i+' --- '+sucess.response.category2_list[i].id + '---' + sucess.response.category2_list[i].name)
         }
         this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
+        this.setState({
+          password:'',
+          username:'',
+        })
       },
       (error)=>{
         this.setState({ 
