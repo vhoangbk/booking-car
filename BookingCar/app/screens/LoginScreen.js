@@ -7,13 +7,16 @@ import {
   Dimensions,
   StyleSheet,
   TextInput,
+  ActivityIndicator,
 } from 'react-native'
 
 var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
 var ApiClient = require('../network/APIClient')
 
-import * as Progress from 'react-native-progress';
+// import * as Progress from 'react-native-progress';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class LoginScreen extends Component {
   
@@ -57,12 +60,19 @@ export default class LoginScreen extends Component {
         <TouchableHighlight style={styles.button_login} onPress={this.pressLogin.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
           <Text style={styles.button_title}>Đăng nhập</Text>
         </TouchableHighlight>
-        
+   
         {/*progress*/}
         { this.state.isShowProgress &&
           <View style={{backgroundColor : '#88888850', alignItems:'center', justifyContent:'center', width:Dimensions.get('window').width, height:Dimensions.get('window').height, position:'absolute', top:0, left:0}}>
-            <Progress.CircleSnail color={['blue']} />
+            {/*<Progress.CircleSnail color={['blue']} />*/}
+            <ActivityIndicator
+              animating={true}
+              style={[styles.centering, {height: 80}]}
+              color='black'
+              size="large"
+            />
           </View>
+          
         }
 
       </View>
@@ -71,6 +81,7 @@ export default class LoginScreen extends Component {
   }
   
   pressBack(){
+    dismissKeyboard();
     this.props.navigator.pop();
   }
 
@@ -90,6 +101,7 @@ export default class LoginScreen extends Component {
    * call api login
    */
   callApiLogin(){
+    dismissKeyboard();
     this.setState({ 
         isShowProgress : true, 
     });
