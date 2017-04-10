@@ -8,25 +8,65 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  Navigator,
   Text,
   View
 } from 'react-native';
 
+import MainScreen from './app/screens/MainScreen'
+import LoginScreen from './app/screens/LoginScreen'
+import LoginSucessScreen from './app/screens/LoginSucessScreen'
+import ListCarScreen from './app/screens/ListCarScreen'
+import BookingSelectCarScreen from './app/screens/BookingSelectCarScreen'
+import ListCustomerScreen from './app/screens/ListCustomerScreen'
+
+var Const = require('./app/utils/Const')
+
 export default class BookingCar extends Component {
+  
+  renderScene(route, navigator){
+    var view : View;
+    switch (route.index) {
+      case Const.SCREEN.MAIN_SCREEN:
+        view = <MainScreen 
+                navigator={navigator}>
+              </MainScreen>
+        break;
+      case Const.SCREEN.LOGIN_SCREEN:
+        view = <LoginScreen
+                 navigator={navigator}>
+              </LoginScreen>
+        break;
+      case Const.SCREEN.LOGIN_SUCESS_SCREEN:
+        view = <LoginSucessScreen
+                 navigator={navigator}>
+              </LoginSucessScreen>
+        break;
+      case Const.SCREEN.LIST_CAR_SCREEN:
+        view = <ListCarScreen
+                 navigator={navigator}>
+              </ListCarScreen>
+        break;
+      case Const.SCREEN.BOOKING_SELECT_CAR_SCREEN:
+        view = <BookingSelectCarScreen
+                 navigator={navigator}>
+              </BookingSelectCarScreen>
+        break;
+      case Const.SCREEN.LIST_CUSTOMER_SCREEN:
+        view = <ListCustomerScreen
+                 navigator={navigator}>
+              </ListCustomerScreen>
+        break;
+    }
+    return view;
+  }
+  
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Navigator
+        initialRoute={{ title: 'main', index: Const.SCREEN.MAIN_SCREEN }}
+        renderScene={this.renderScene}
+      />
     );
   }
 }
@@ -38,16 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  
 });
 
 AppRegistry.registerComponent('BookingCar', () => BookingCar);
