@@ -13,6 +13,7 @@ var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
 import DatePicker from 'react-native-datepicker'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import BaseScreen from './BaseScreen'
 
 var DATA=[
   {stt:'1', name:'hoang', sdt:'012345678',thanhtoan:'170'},
@@ -20,7 +21,7 @@ var DATA=[
   {stt:'3', name:'Hung', sdt:'012343432',thanhtoan:'170'},
 ]
 
-export default class ListCustomerScreen extends Component {
+export default class ListCustomerScreen extends BaseScreen {
   
   constructor(props){
     super(props)

@@ -10,6 +10,8 @@ module.exports = {
   MESSAGE:{
     USERNAME_EMPTY:'Hãy nhập tên đăng nhập',
     PASSWORD_EMPTY:'Hãy nhập tên mật khẩu',
+    INTERNET_NOT_CONNECT:'Không có kết nối mạng, xin kiểm tra kết nối',
+    ERROR_NETWORK:'Có lỗi xảy ra, xin thử lại',
   },
   SCREEN:{
     MAIN_SCREEN:1,
@@ -20,6 +22,6 @@ module.exports = {
     LIST_CUSTOMER_SCREEN:6,
   },
   API:{
-    LOGIN_URL:'http://uema.archi-edge.com/api/v1/category2.json'
+    LOGIN_URL:'http://vexe.dogothanhlang.com/index.php?route=api/apilogin'
   }
 };

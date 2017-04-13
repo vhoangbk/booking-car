@@ -7,9 +7,11 @@ import {
   Dimensions,
 } from 'react-native';
 
+import BaseScreen from './BaseScreen'
+
 var Const = require('../utils/Const')
 
-export default class LoginScreen extends Component {
+export default class LoginScreen extends BaseScreen {
   
   render(){
     return(

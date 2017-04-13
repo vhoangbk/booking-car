@@ -12,8 +12,9 @@ import {
 var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
 import BookingSelectCarScreen from './BookingSelectCarScreen'
+import BaseScreen from './BaseScreen'
 
-export default class LoginSucessScreen extends Component {
+export default class LoginSucessScreen extends BaseScreen {
   
   constructor(props){
     super(props);

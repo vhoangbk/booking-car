@@ -8,6 +8,7 @@ import {
   StyleSheet,
   TextInput,
   ActivityIndicator,
+  NetInfo,
 } from 'react-native'
 
 var Const = require('../utils/Const')
@@ -17,8 +18,10 @@ var ApiClient = require('../network/APIClient')
 // import * as Progress from 'react-native-progress';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import Spinner from 'react-native-loading-spinner-overlay';
+import BaseScreen from './BaseScreen'
+import md5 from "react-native-md5";
 
-export default class LoginScreen extends Component {
+export default class LoginScreen extends BaseScreen {
   
   constructor(props){
     super(props);
@@ -26,8 +29,29 @@ export default class LoginScreen extends Component {
       username : '',
       password : '',
       isShowProgress:false,
+      isInternetConnected:false,
     }
   }
+  
+  componentDidMount() {
+    NetInfo.addEventListener(
+        'change',
+        this.handleConnectionInfoChange.bind(this)
+    );
+  }
+  
+  componentWillUnmount() {
+    NetInfo.removeEventListener(
+        'change',
+        this.handleConnectionInfoChange.bind(this)
+    );
+  }
+  
+  handleConnectionInfoChange(isConnected){
+    this.setState({
+      isInternetConnected : isConnected,
+    });
+  };
   
   render(){
     return(
@@ -98,32 +122,48 @@ export default class LoginScreen extends Component {
 
     this.callApiLogin();
   }
+  
   /*
    * call api login
    */
   callApiLogin(){
     dismissKeyboard();
+    if (this.state.isInternetConnected == 'none' || this.state.isInternetConnected == false){
+      Utils.showInfoMessage(Const.MESSAGE.INTERNET_NOT_CONNECT);
+      return;
+    }
+    
     this.setState({ 
         isShowProgress : true, 
     });
-    var params = {category1_id: 1,};
+    
+    //4577bc35bc39c53a66d7b3d3ed10e8433a223603
+    let md5pass = md5.hex_md5( this.state.password );
+    console.log('md5pass: '+md5pass);
+    var params = {username:this.state.username, password:md5pass};
     ApiClient.postRequest(
       Const.API.LOGIN_URL,
       params,
       (sucess)=>{
+        console.log('[sucess] '+JSON.stringify(sucess))
         this.setState({ 
           isShowProgress : false, 
         });
-        for (i=0; i<sucess.response.category2_list.length; i++){
-            console.log(i+' --- '+sucess.response.category2_list[i].id + '---' + sucess.response.category2_list[i].name)
-        }
-        this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
-        this.setState({
-          password:'',
-          username:'',
-        })
+
+        if(sucess.success == true){
+          this.setState({
+            password:'',
+            username:'',
+          })
+          this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
+        }else{
+          Utils.showInfoMessage(sucess.message);
+        }        
+        
       },
       (error)=>{
+        console.log('[error] '+error)
+        Utils.showInfoMessage(Const.MESSAGE.ERROR_NETWORK);
         this.setState({ 
           isShowProgress : false, 
         });
@@ -168,6 +208,7 @@ const styles = StyleSheet.create({
     paddingLeft:5,
     paddingRight:5,
     fontSize:20,
+    width:Dimensions.get('window').width - 60,
   },
   input_password:{
     borderColor: 'gray', 
@@ -180,6 +221,7 @@ const styles = StyleSheet.create({
     paddingRight:5,
     fontSize:20,
     marginTop:20,
+    width:Dimensions.get('window').width - 60,
   },
   button_login:{
     backgroundColor:Const.COLOR.COLOR_0277BD,
