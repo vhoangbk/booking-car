@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 
 import BaseScreen from './BaseScreen'
+import BlueButton from '../component/BlueButton'
 
 var Const = require('../utils/Const')
+var Strings = require('../utils/Strings')
 
 export default class MainScreen extends BaseScreen {
   
@@ -17,9 +19,7 @@ export default class MainScreen extends BaseScreen {
     return(
       <View style={styles.container}>
         {/* button login */} 
-        <TouchableHighlight style={styles.button_login} onPress={this.pressLogin.bind(this)} underlayColor={Const.COLOR.COLOR_0277BD_PRESS}>
-          <Text style={styles.button_title}>Đăng nhập</Text>
-        </TouchableHighlight>
+        <BlueButton onPress={this.pressLogin.bind(this)} title={Strings.LOGIN}></BlueButton>
   
         {/* button list car */}
         <TouchableHighlight style={styles.button_list_car} onPress={this.pressListCar.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
@@ -47,15 +47,6 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     justifyContent:'center',
     alignItems:'center',
-  },
-  button_login:{
-    backgroundColor:Const.COLOR.COLOR_0277BD,
-    paddingTop:15,
-    paddingBottom:15,
-    justifyContent:'center',
-    alignItems:'center',
-    width:Dimensions.get('window').width-60,
-    borderRadius:5,
   },
   button_title:{
     fontSize:20,

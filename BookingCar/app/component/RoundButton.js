@@ -1,7 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text, View, StyleSheet, TouchableHighlight } from 'react-native'
-
-let COLOR_607D8B ='#607D8B'
+import { Text, View, StyleSheet, TouchableHighlight } from 'react-native'
 
 export default class RoundButton extends React.Component {
     
@@ -18,7 +16,7 @@ export default class RoundButton extends React.Component {
 
 const styles = StyleSheet.create({
   button_container:{
-    backgroundColor:COLOR_607D8B,
+    backgroundColor:'#607D8B',
     borderRadius:5,
     paddingLeft:10,
     paddingRight:10,

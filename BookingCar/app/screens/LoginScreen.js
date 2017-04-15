@@ -16,6 +16,8 @@ var Utils = require('../utils/Utils')
 var ApiClient = require('../network/APIClient')
 
 import BackButton from '../component/BackButton'
+import BlueButton from '../component/BlueButton'
+var Strings = require('../utils/Strings')
 
 // import * as Progress from 'react-native-progress';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
@@ -82,9 +84,7 @@ export default class LoginScreen extends BaseScreen {
         </TextInput>
         
         {/*button login*/}
-        <TouchableHighlight style={styles.button_login} onPress={this.pressLogin.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
-          <Text style={styles.button_title}>Đăng nhập</Text>
-        </TouchableHighlight>
+        <BlueButton style={styles.button_login} onPress={this.pressLogin.bind(this)} title={Strings.LOGIN}></BlueButton>
    
         {/*progress*/}
         { this.state.isShowProgress &&
@@ -208,16 +208,7 @@ const styles = StyleSheet.create({
     width:Dimensions.get('window').width - 60,
   },
   button_login:{
-    backgroundColor:Const.COLOR.COLOR_0277BD,
-    paddingLeft:20,
-    paddingRight:20,
-    paddingTop:15,
-    paddingBottom:15,
-    borderRadius:5,
     marginTop:20,
-    justifyContent:'center',
-    alignItems:'center',
-    width:Dimensions.get('window').width - 60,
   },
   button_title:{
     fontSize:20,
