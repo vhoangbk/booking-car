@@ -13,6 +13,7 @@ var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
 import BookingSelectCarScreen from './BookingSelectCarScreen'
 import BaseScreen from './BaseScreen'
+import LogoutButton from '../component/LogoutButton'
 
 export default class LoginSucessScreen extends BaseScreen {
   
@@ -25,12 +26,10 @@ export default class LoginSucessScreen extends BaseScreen {
     return(
       <View style={styles.container}>
         {/* button back */} 
-        <TouchableHighlight style={styles.button_logout} onPress={this.pressLogout.bind(this)} underlayColor={Const.COLOR.COLOR_607D8B_PRESS}>
-          <Text style={styles.button_logout_title}>Đăng xuất</Text>
-        </TouchableHighlight>
+        <LogoutButton onPress={this.pressLogout.bind(this)} ></LogoutButton>
         
         {/* button booking ticket */} 
-        <TouchableHighlight style={styles.button_login} onPress={this.pressBooking.bind(this)} underlayColor={Const.COLOR.COLOR_0277BD_PRESS}>
+        <TouchableHighlight style={styles.button_booking} onPress={this.pressBooking.bind(this)} underlayColor={Const.COLOR.COLOR_0277BD_PRESS}>
           <Text style={styles.button_title}>Đặt vé</Text>
         </TouchableHighlight>
   
@@ -64,23 +63,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   },
-  button_logout:{
-    backgroundColor:'#FF5722',
-    paddingLeft:10,
-    paddingRight:10,
-    paddingTop:5,
-    paddingBottom:5,
-    borderRadius:5,
-    right:20,
-    top:40,
-    position:'absolute',
-  },
-  button_logout_title:{
-    fontSize:17,
-    fontWeight: 'bold',
-    color:'white',
-  },
-  button_login:{
+  button_booking:{
     backgroundColor:Const.COLOR.COLOR_0277BD,
     paddingTop:15,
     paddingBottom:15,

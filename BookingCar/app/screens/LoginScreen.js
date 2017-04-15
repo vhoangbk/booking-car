@@ -15,6 +15,8 @@ var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
 var ApiClient = require('../network/APIClient')
 
+import BackButton from '../component/BackButton'
+
 // import * as Progress from 'react-native-progress';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -56,10 +58,8 @@ export default class LoginScreen extends BaseScreen {
   render(){
     return(
       <View style={styles.container}>
-        {/* button back */} 
-        <TouchableHighlight style={styles.button_back} onPress={this.pressBack.bind(this)} underlayColor={Const.COLOR.COLOR_607D8B_PRESS}>
-          <Text style={styles.button_back_title}>Trở lại</Text>
-        </TouchableHighlight>
+        {/* button back */}
+        <BackButton onPress={this.pressBack.bind(this)} ></BackButton>
         
         {/*username input*/}
         <TextInput style={styles.input_username} placeholder='Tên đăng nhập'
@@ -139,7 +139,6 @@ export default class LoginScreen extends BaseScreen {
     
     //4577bc35bc39c53a66d7b3d3ed10e8433a223603
     let md5pass = md5.hex_md5( this.state.password );
-    console.log('md5pass: '+md5pass);
     var params = {username:this.state.username, password:md5pass};
     ApiClient.postRequest(
       Const.API.LOGIN_URL,
@@ -158,12 +157,13 @@ export default class LoginScreen extends BaseScreen {
           this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
         }else{
           Utils.showInfoMessage(sucess.message);
-        }        
+        }   
         
       },
       (error)=>{
         console.log('[error] '+error)
         Utils.showInfoMessage(Const.MESSAGE.ERROR_NETWORK);
+        
         this.setState({ 
           isShowProgress : false, 
         });
@@ -181,22 +181,6 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     justifyContent:'center',
     alignItems:'center',
-  },
-  button_back:{
-    backgroundColor:Const.COLOR.COLOR_607D8B,
-    paddingLeft:10,
-    paddingRight:10,
-    paddingTop:5,
-    paddingBottom:5,
-    borderRadius:5,
-    left:20,
-    top:40,
-    position:'absolute',
-  },
-  button_back_title:{
-    fontSize:17,
-    fontWeight: 'bold',
-    color:'white',
   },
   input_username:{
     borderColor: 'gray', 

@@ -11,7 +11,7 @@ import BaseScreen from './BaseScreen'
 
 var Const = require('../utils/Const')
 
-export default class LoginScreen extends BaseScreen {
+export default class MainScreen extends BaseScreen {
   
   render(){
     return(
@@ -25,7 +25,8 @@ export default class LoginScreen extends BaseScreen {
         <TouchableHighlight style={styles.button_list_car} onPress={this.pressListCar.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
           <Text style={styles.button_title}>Danh sách xe</Text>
         </TouchableHighlight>
-    
+        
+        
       </View>
     )
   }
