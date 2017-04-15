@@ -1,9 +1,7 @@
 
 import React, { Component } from 'react';
 import {
-  Text,
   View,
-  TouchableHighlight,
   Dimensions,
   StyleSheet,
   TextInput,
@@ -113,6 +111,7 @@ export default class LoginScreen extends BaseScreen {
   pressLogin(){
     if('' == this.state.username){
       Utils.showInfoMessage(Const.MESSAGE.USERNAME_EMPTY);
+      this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
       return;
     }
     if('' == this.state.password){
@@ -210,9 +209,5 @@ const styles = StyleSheet.create({
   button_login:{
     marginTop:20,
   },
-  button_title:{
-    fontSize:20,
-    fontWeight: 'bold',
-    color:'white',
-  },
+
 })

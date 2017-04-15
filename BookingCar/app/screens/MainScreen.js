@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
-  TouchableHighlight,
   StyleSheet,
-  Dimensions,
 } from 'react-native';
 
 import BaseScreen from './BaseScreen'
 import BlueButton from '../component/BlueButton'
+import GreenButton from '../component/GreenButton'
 
 var Const = require('../utils/Const')
 var Strings = require('../utils/Strings')
@@ -22,10 +20,7 @@ export default class MainScreen extends BaseScreen {
         <BlueButton onPress={this.pressLogin.bind(this)} title={Strings.LOGIN}></BlueButton>
   
         {/* button list car */}
-        <TouchableHighlight style={styles.button_list_car} onPress={this.pressListCar.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
-          <Text style={styles.button_title}>Danh sách xe</Text>
-        </TouchableHighlight>
-        
+        <GreenButton onPress={this.pressListCar.bind(this)} title={Strings.LIST_CAR} style={styles.button_list_car}></GreenButton>
         
       </View>
     )
@@ -48,20 +43,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
   },
-  button_title:{
-    fontSize:20,
-    fontWeight: 'bold',
-    color:'white',
-  },
   button_list_car:{
-    backgroundColor:Const.COLOR.COLOR_2E7D32,
-    paddingTop:15,
-    paddingBottom:15,
     marginTop:20,
-    justifyContent:'center',
-    alignItems:'center',
-    width:Dimensions.get('window').width-60,
-    borderRadius:5,
   },
   
 })

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
-  TouchableHighlight,
   Dimensions,
   StyleSheet,
-  Image,
 } from 'react-native';
 
 var Const = require('../utils/Const')
@@ -14,6 +11,8 @@ import DatePicker from 'react-native-datepicker'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import BaseScreen from './BaseScreen'
 import BackButton from '../component/BackButton'
+import BlueButton from '../component/BlueButton'
+var Strings = require('../utils/Strings')
 
 export default class ListCarScreen extends BaseScreen {
   
@@ -103,9 +102,7 @@ export default class ListCarScreen extends BaseScreen {
         </View>
         
         {/*button search*/}
-        <TouchableHighlight style={styles.button_search} onPress={this.pressSearch.bind(this)} underlayColor={Const.COLOR.COLOR_2E7D32_PRESS}>
-          <Text style={styles.button_title}>Tìm kiếm</Text>
-        </TouchableHighlight>
+        <BlueButton onPress={this.pressSearch.bind(this)} title={Strings.SEARCH} style={styles.button_search}></BlueButton>
 
       </View>
     )
@@ -173,21 +170,7 @@ const styles = StyleSheet.create({
     width:Dimensions.get('window').width-100,
   },
   button_search:{
-    backgroundColor:Const.COLOR.COLOR_0277BD,
-    paddingLeft:20,
-    paddingRight:20,
-    paddingTop:15,
-    paddingBottom:15,
-    borderRadius:5,
     marginTop:20,
-    justifyContent:'center',
-    alignItems:'center',
-    width:Dimensions.get('window').width - 100,
-  },
-  button_title:{
-    fontSize:20,
-    fontWeight: 'bold',
-    color:'white',
   },
   
 })
