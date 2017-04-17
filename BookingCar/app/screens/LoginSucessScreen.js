@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
+  Platform,
 } from 'react-native';
 
 var Const = require('../utils/Const')
 var Utils = require('../utils/Utils')
 import BookingSelectCarScreen from './BookingSelectCarScreen'
 import BaseScreen from './BaseScreen'
-import LogoutButton from '../component/LogoutButton'
+import RoundButton from '../component/RoundButton'
 import BlueButton from '../component/BlueButton'
 import GreenButton from '../component/GreenButton'
 var Strings = require('../utils/Strings')
@@ -18,13 +19,18 @@ export default class LoginSucessScreen extends BaseScreen {
   constructor(props){
     super(props);
     
+    Utils.getToken((error, result)=>{
+      this.setState({
+        token:result,
+      })
+    });
   }
   
   render(){
     return(
       <View style={styles.container}>
         {/* button back */} 
-        <LogoutButton onPress={this.pressLogout.bind(this)} ></LogoutButton>
+        <RoundButton title={Strings.LOGOUT} onPress={this.pressLogout.bind(this)} styleContainer={styles.button_logout} underlayColor='#607D8B70'></RoundButton>
         
         {/* button booking ticket */} 
         <BlueButton onPress={this.pressBooking.bind(this)} title={Strings.BOOKING_CAR}></BlueButton>
@@ -37,6 +43,7 @@ export default class LoginSucessScreen extends BaseScreen {
   }
   
   pressLogout(){
+    console.log('token: '+this.state.token);
     this.props.navigator.pop();
   }
 
@@ -60,5 +67,9 @@ const styles = StyleSheet.create({
   button_list_car:{
     marginTop:20,
   },
-  
+  button_logout:{
+    right:20,
+    top:(Platform.OS === 'ios') ? 40 : 20,
+    position:'absolute',
+  }
 })

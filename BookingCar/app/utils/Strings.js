@@ -6,4 +6,5 @@ module.exports = {
   BOOKING_CAR:'Đặt vé',
   CONTINUME:'Tiếp tục',
   SEARCH:'Tìm kiếm',
+  BED:'Giường',
 };

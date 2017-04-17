@@ -1,11 +1,16 @@
 import React from 'react';
 
+
+
+var Utils = require('../utils/Utils')
+var Const = require('../utils/Const')
+
 import {
   Alert,
 } from 'react-native';
 
 module.exports = {
-  postRequest(url, params, sucess, error){
+  postRequest(url, params, successCallback, errorCallback){
     fetch(url, {
             method: 'POST',
             headers: {
@@ -15,8 +20,20 @@ module.exports = {
             body: JSON.stringify(params)
           })
           .then((response)=> response.json())
-          .then(sucess)
-          .catch(error)
+          .then((success)=>{
+            console.log('[success] '+JSON.stringify(success))
+            if(success.success == true){
+              successCallback(success)
+            }else{
+              Utils.showInfoMessage(success.message);
+              errorCallback(success)
+            }
+          })
+          .catch((error)=>{
+            console.log('[error] '+error)
+            Utils.showInfoMessage(Const.MESSAGE.ERROR_NETWORK);
+            errorCallback(error)
+          })
           .done()
   }
 };

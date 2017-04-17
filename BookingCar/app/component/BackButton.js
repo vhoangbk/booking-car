@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableHighlight } from 'react-native'
+import { Text, View, StyleSheet, TouchableHighlight,Platform } from 'react-native'
 
 import RoundButton from './RoundButton'
 var Strings = require('../utils/Strings')
@@ -18,7 +18,7 @@ export default class BackButton extends React.Component {
 const styles = StyleSheet.create({
   styleContainer:{
     left:20,
-    top:40,
+    top:(Platform.OS === 'ios') ? 40 : 20,
     position:'absolute',
   }
 })

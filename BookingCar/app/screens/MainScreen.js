@@ -13,6 +13,13 @@ var Strings = require('../utils/Strings')
 
 export default class MainScreen extends BaseScreen {
   
+  componentDidMount() {
+    super.componentDidMount();
+    this.setState({
+      main:true,
+    })
+  }
+  
   render(){
     return(
       <View style={styles.container}>
@@ -33,6 +40,7 @@ export default class MainScreen extends BaseScreen {
   pressListCar(){
     this.props.navigator.push({ title: 'list_car', index: Const.SCREEN.LIST_CAR_SCREEN });
   }
+  
   
 }
 

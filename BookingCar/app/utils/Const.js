@@ -23,5 +23,8 @@ module.exports = {
   },
   API:{
     LOGIN_URL:'http://vexe.dogothanhlang.com/index.php?route=api/apilogin'
+  },
+  KEY:{
+    KEY_TOKEN:'token',
   }
 };

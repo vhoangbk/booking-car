@@ -13,6 +13,8 @@ import DatePicker from 'react-native-datepicker'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import BaseScreen from './BaseScreen'
 import BackButton from '../component/BackButton'
+import RoundButton from '../component/RoundButton'
+var Strings = require('../utils/Strings')
 
 var DATA=[
   {stt:'1', name:'hoang', sdt:'012345678',thanhtoan:'170'},
@@ -36,6 +38,9 @@ export default class ListCustomerScreen extends BaseScreen {
       <View style={styles.container}>
         {/* button back */} 
         <BackButton onPress={this.pressBack.bind(this)} ></BackButton>
+        
+        {/* button bed */} 
+        <RoundButton title={Strings.BED} onPress={this.pressBed.bind(this)} styleContainer={styles.button_bed} underlayColor='#607D8B70'></RoundButton>
         
         <View style={styles.header_list}>
           <View style={styles.header_cell1}>
@@ -99,7 +104,9 @@ export default class ListCustomerScreen extends BaseScreen {
     this.props.navigator.pop();
   }
 
-  
+  pressBed(){
+    
+  }
 }
 
 const styles = StyleSheet.create({
@@ -192,5 +199,10 @@ const styles = StyleSheet.create({
     color:'white',
     fontSize:15,
     fontWeight: 'bold',
+  },
+  button_bed:{
+    right:20,
+    top:40,
+    position:'absolute',
   }
 })
