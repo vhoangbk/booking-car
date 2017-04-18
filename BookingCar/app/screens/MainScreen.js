@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
+  BackAndroid,
 } from 'react-native';
 
 import BaseScreen from './BaseScreen'
@@ -12,12 +13,39 @@ var Const = require('../utils/Const')
 var Strings = require('../utils/Strings')
 
 export default class MainScreen extends BaseScreen {
+
+  constructor(props){
+    super(props)
+
+  }
   
   componentDidMount() {
     super.componentDidMount();
-    this.setState({
-      main:true,
-    })
+    BackAndroid.addEventListener('hardwareBackPress', this.onBackPress.bind(this));
+  }
+
+  componentWillUnmount(){
+    super.componentWillUnmount();
+    BackAndroid.removeEventListener('hardwareBackPress');
+  }
+
+  onBackPress(){
+    // if (Const.CURRENT_SCREEN == Const.SCREEN.MAIN_SCREEN){
+    //   return false;
+    // }else if(Const.CURRENT_SCREEN == Const.SCREEN.LOGIN_SUCESS_SCREEN){
+    //   return true;
+    // } else{
+    //   this.props.navigator.pop();
+    //   return true;
+    // }
+    if (Const.CURRENT_SCREEN == Const.SCREEN.LOGIN_SUCESS_SCREEN){
+      return true;
+    }
+    if (this.props.navigator && this.props.navigator.getCurrentRoutes().length > 1){
+      console.log('kdfjalkdjalk '+this.props.navigator.getCurrentRoutes().length);
+      this.props.navigator.pop();
+      return true;
+    }
   }
   
   render(){

@@ -43,7 +43,6 @@ export default class LoginSucessScreen extends BaseScreen {
   }
   
   pressLogout(){
-    console.log('token: '+this.state.token);
     this.props.navigator.pop();
   }
 

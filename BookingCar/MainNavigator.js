@@ -19,24 +19,16 @@ import LoginSucessScreen from './app/screens/LoginSucessScreen'
 import ListCarScreen from './app/screens/ListCarScreen'
 import BookingSelectCarScreen from './app/screens/BookingSelectCarScreen'
 import ListCustomerScreen from './app/screens/ListCustomerScreen'
+import LoginSuccessNavigator from './LoginSuccessNavigator'
 
 var Const = require('./app/utils/Const')
 var Utils = require('./app/utils/Utils')
 
-export default class BookingCar extends Component {
+export default class MainNavigator extends Component {
   
-
-
   constructor(props){
     super(props)
-    this.state = {
-      token:'',
-    }
-    Utils.getToken((error, result)=>{
-      this.setState({
-        token:result,
-      })
-    });
+    
   }
   
   renderScene(route, navigator){
@@ -54,8 +46,8 @@ export default class BookingCar extends Component {
               </LoginScreen>
         break;
       case Const.SCREEN.LOGIN_SUCESS_SCREEN:
-        view = <LoginSucessScreen
-                 navigator={navigator}>
+        view = <LoginSucessScreen 
+                navigator={navigator}>
               </LoginSucessScreen>
         break;
       case Const.SCREEN.LIST_CAR_SCREEN:
@@ -76,15 +68,12 @@ export default class BookingCar extends Component {
     
     return (
       <Navigator
-        initialRoute={{title: 'main', index: Const.SCREEN.MAIN_SCREEN}}
+        initialRoute={{ title: 'main', index: Const.SCREEN.MAIN_SCREEN }}
         renderScene={this.renderScene}
       />
     );
   }
   
-  initialRoute(){
-    return { title: 'main', index: Const.SCREEN.MAIN_SCREEN }
-  }
 }
 
 const styles = StyleSheet.create({

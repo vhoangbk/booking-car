@@ -26,5 +26,6 @@ module.exports = {
   },
   KEY:{
     KEY_TOKEN:'token',
-  }
+  },
+  CURRENT_SCREEN:1,
 };
