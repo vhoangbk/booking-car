@@ -20,12 +20,12 @@ export default class MainScreen extends BaseScreen {
   }
   
   componentDidMount() {
-    super.componentDidMount();
+    // super.componentDidMount();
     BackAndroid.addEventListener('hardwareBackPress', this.onBackPress.bind(this));
   }
 
   componentWillUnmount(){
-    super.componentWillUnmount();
+    // super.componentWillUnmount();
     BackAndroid.removeEventListener('hardwareBackPress');
   }
 

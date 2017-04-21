@@ -20,10 +20,9 @@ var Strings = require('../utils/Strings')
 
 // import * as Progress from 'react-native-progress';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
-import Spinner from 'react-native-loading-spinner-overlay';
 import BaseScreen from './BaseScreen'
+import Progress from '../component/Progress'
 import md5 from "react-native-md5";
-import { withConnection, connectionShape } from 'react-native-connection-info';
 
 export default class LoginScreen extends BaseScreen {
   
@@ -36,8 +35,9 @@ export default class LoginScreen extends BaseScreen {
     }
     
   }
-  
+
   render(){
+
     return(
       <View style={styles.container}>
         {/* button back */}
@@ -68,16 +68,7 @@ export default class LoginScreen extends BaseScreen {
    
         {/*progress*/}
         { this.state.isShowProgress &&
-          <View style={{backgroundColor : '#88888850', alignItems:'center', justifyContent:'center', width:Dimensions.get('window').width, height:Dimensions.get('window').height, position:'absolute', top:0, left:0}}>
-            {/*<Progress.CircleSnail color={['blue']} />*/}
-            <ActivityIndicator
-              animating={true}
-              style={[styles.centering, {height: 80}]}
-              color='black'
-              size="large"
-            />
-          </View>
-          
+          <Progress />
         }
 
       </View>
@@ -99,10 +90,10 @@ export default class LoginScreen extends BaseScreen {
       Utils.showInfoMessage(Const.MESSAGE.PASSWORD_EMPTY);
       return;
     }
-    if (this.state.isInternetConnected == false){
-      Utils.showInfoMessage(Const.MESSAGE.INTERNET_NOT_CONNECT);
-      return;
-    }
+    // if (this.state.isInternetConnected == false){
+    //   Utils.showInfoMessage(Const.MESSAGE.INTERNET_NOT_CONNECT);
+    //   return;
+    // }
 
     this.callApiLogin();
   }
@@ -136,7 +127,7 @@ export default class LoginScreen extends BaseScreen {
         // save token
         Utils.setToken(success.data.token);
         
-        this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
+        this.props.navigator.resetTo({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
         
       },
       (error)=>{

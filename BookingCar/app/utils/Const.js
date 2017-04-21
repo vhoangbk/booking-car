@@ -22,7 +22,8 @@ module.exports = {
     LIST_CUSTOMER_SCREEN:6,
   },
   API:{
-    LOGIN_URL:'http://vexe.dogothanhlang.com/index.php?route=api/apilogin'
+    LOGIN_URL:'http://vexe.dogothanhlang.com/index.php?route=api/apilogin',
+    LOGOUT_URL:'http://vexe.dogothanhlang.com/index.php?route=api/apilogin/logout'
   },
   KEY:{
     KEY_TOKEN:'token',

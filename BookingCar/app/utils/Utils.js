@@ -24,7 +24,7 @@ module.exports = {
   },
   getToken(callback){
     try {
-      AsyncStorage.getItem(Const.KEY.KEY_TOKEN, callback);
+      AsyncStorage.getItem(Const.KEY.KEY_TOKEN).then(callback);
     } catch (error) {
     }
   }

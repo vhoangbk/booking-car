@@ -5,6 +5,6 @@
  */
 import { AppRegistry } from 'react-native'
 
-import BookingCar from './BookingCar'
+import Router from './Router'
 
-AppRegistry.registerComponent('BookingCar', () => BookingCar);
+AppRegistry.registerComponent('BookingCar', () => Router);

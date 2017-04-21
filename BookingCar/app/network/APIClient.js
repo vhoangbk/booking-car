@@ -1,16 +1,16 @@
 import React from 'react';
 
-
-
 var Utils = require('../utils/Utils')
 var Const = require('../utils/Const')
 
 import {
   Alert,
+  NetInfo,
 } from 'react-native';
 
 module.exports = {
   postRequest(url, params, successCallback, errorCallback){
+    console.log('[params]'+ ' '+ url +' ' +JSON.stringify(params))
     fetch(url, {
             method: 'POST',
             headers: {

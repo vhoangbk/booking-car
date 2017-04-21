@@ -8,40 +8,39 @@ export default class BaseScreen extends Component {
   
   constructor(props){
     super(props);
-    this.state = {
-      isInternetConnected:false,
-      token:'',
-    }
+    // this.state = {
+    //   isInternetConnected:false,
+    // }
     
-    NetInfo.isConnected.fetch().then(isConnected => {
-      this.setState({ 
-        isInternetConnected:isConnected,
-      });
-    });
+    // NetInfo.isConnected.fetch().then(isConnected => {
+    //   this.setState({ 
+    //     isInternetConnected:isConnected,
+    //   });
+    // });
     
   }
   
   componentDidMount() {
-    NetInfo.addEventListener(
-        'change',
-        this.handleConnectionInfoChange.bind(this)
-    );
+    // NetInfo.addEventListener(
+    //     'change',
+    //     this.handleConnectionInfoChange.bind(this)
+    // );
     
   }
   
   componentWillUnmount() {
-    NetInfo.removeEventListener(
-        'change',
-        this.handleConnectionInfoChange.bind(this)
-    );
+    // NetInfo.removeEventListener(
+    //     'change',
+    //     this.handleConnectionInfoChange.bind(this)
+    // );
   }
   
-  handleConnectionInfoChange(connected){
-    NetInfo.isConnected.fetch().then(isConnected => {
-      this.setState({ 
-        isInternetConnected:isConnected,
-      });
-    });
-  };
+  // handleConnectionInfoChange(connected){
+  //   NetInfo.isConnected.fetch().then(isConnected => {
+  //     this.setState({ 
+  //       isInternetConnected:isConnected,
+  //     });
+  //   });
+  // };
   
 }
