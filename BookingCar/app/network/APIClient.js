@@ -11,6 +11,7 @@ import {
 module.exports = {
   postRequest(url, params, successCallback, errorCallback){
     console.log('[params]'+ ' '+ url +' ' +JSON.stringify(params))
+    var isSuccess = false;
     fetch(url, {
             method: 'POST',
             headers: {
@@ -22,6 +23,7 @@ module.exports = {
           .then((response)=> response.json())
           .then((success)=>{
             console.log('[success] '+JSON.stringify(success))
+            isSuccess = true;
             if(success.success == true){
               successCallback(success)
             }else{
@@ -30,9 +32,11 @@ module.exports = {
             }
           })
           .catch((error)=>{
-            console.log('[error] '+error)
-            Utils.showInfoMessage(Const.MESSAGE.ERROR_NETWORK);
-            errorCallback(error)
+            if(isSuccess == false){
+              console.log('[error] '+error)
+              Utils.showInfoMessage(Const.MESSAGE.ERROR_NETWORK);
+              errorCallback(error)
+            }
           })
           .done()
   }

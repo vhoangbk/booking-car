@@ -127,8 +127,12 @@ export default class LoginScreen extends BaseScreen {
         // save token
         Utils.setToken(success.data.token);
         
-        this.props.navigator.resetTo({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
+        this.props.navigator.push({ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN });
         
+        setTimeout(()=>{
+          this.props.navigator.immediatelyResetRouteStack([{ title: 'login_success', index: Const.SCREEN.LOGIN_SUCESS_SCREEN }]);
+        }, 500);
+
       },
       (error)=>{
         this.setState({ 

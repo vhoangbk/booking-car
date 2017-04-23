@@ -98,12 +98,19 @@ export default class Router extends Component {
         <Navigator
           initialRoute={(this.state.token == '' || this.state.token == null) ? routes[0] : routes[1]}
           renderScene={this.renderScene}
-          configureScene={(route) => {
-              return Navigator.SceneConfigs.FadeAndroid;
-          }}
+          configureScene={ this.configureScene }
         />
       );
     }
+  }
+
+  configureScene(route, routeStack){
+    if(route.index==3){
+      return Navigator.SceneConfigs.FloatFromBottom 
+    }else{
+      return Navigator.SceneConfigs.PushFromRight 
+    }
+   
   }
 
 }
